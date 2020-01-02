@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   MAIN                                                              01/02/2020 15:59:54 PAGE 1   
+C51 COMPILER V9.60.0.0   MAIN                                                              01/02/2020 16:15:34 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
@@ -11,97 +11,109 @@ line level    source
    2          #include "includeAll.h"
    3          //=============================================================================
    4          void main() {
-   5   1        SysInit();
-   6   1        VarsInit();
-   7   1        //使能看门�?
-   8   1        F_turnOnWDT();
-   9   1      
-  10   1        P_buzz = 0;
-  11   1      
-  12   1        
-  13   1      
-  14   1        delayMs(500);
-  15   1        //P_D=0;
-  16   1        P_ledcom=1;
-  17   1        SMG_COM1=0;
-  18   1        SMG_COM2=1;
-  19   1        SMG_A=1;
-  20   1        SMG_B=1;
-  21   1        SMG_C=1;
-  22   1        SMG_D=1;
-  23   1        SMG_F=1;
-  24   1        SMG_E=1;
-  25   1        SMG_G=0;
-  26   1        SMG_DG=0;
-  27   1      
-  28   1      
-  29   1        
-  30   1        
-  31   1        while(1){
-  32   2          //清看门狗
-  33   2          F_clearWDT();
-  34   2          //业务代码
-  35   2          TimeProcess();
-  36   2          TaskSetting();
-  37   2          TaskProcess();
-  38   2          DisplayProcess();
-  39   2          
-  40   2        }
-  41   1      }
-  42          
-  43          //=============================================================================
-  44            void TimeProcess(){
-  45   1          static uint8_t timer5ms = 0;
-  46   1      
-  47   1          if (b1ms) {
-  48   2            // 1ms 执�?�一�?
-  49   2            b1ms = 0;
-  50   2            timer5ms++;
-  51   2          }
-  52   1          if (timer5ms >= 5) {
-  53   2            P1MODL = 0x8a;
-  54   2            delayMs(20);
-  55   2            GetKeys();
-C51 COMPILER V9.60.0.0   MAIN                                                              01/02/2020 15:59:54 PAGE 2   
+   5   1        int a;
+   6   1        SysInit();
+   7   1        VarsInit();
+   8   1        //使能看门�?
+   9   1        F_turnOnWDT();
+  10   1      
+  11   1        P_buzz = 0;
+  12   1      
+  13   1        
+  14   1      
+  15   1        delayMs(500);
+  16   1        //P_D=0;
+  17   1        P_ledcom=1;
+  18   1        
+  19   1        
+  20   1        while(1){
+  21   2          //清看门狗
+  22   2          F_clearWDT();
+  23   2          //业务代码
+  24   2          TimeProcess();
+  25   2          TaskSetting();
+  26   2          TaskProcess();
+  27   2          DisplayProcess();
+  28   2          for(a=0;a<200000;a++){
+  29   3        SMG_COM1=0;
+  30   3        SMG_COM2=1;
+  31   3        SMG_A=1;
+  32   3        SMG_B=0;
+  33   3        SMG_C=0;
+  34   3        SMG_D=0;
+  35   3        SMG_F=1;
+  36   3        SMG_E=1;
+  37   3        SMG_G=1;
+  38   3        SMG_DG=0;
+  39   3        delayMs(1);
+  40   3          SMG_COM1=1;
+  41   3        SMG_COM2=0;
+  42   3        SMG_A=1;
+  43   3        SMG_B=1;
+  44   3        SMG_C=1;
+  45   3        SMG_D=1;
+  46   3        SMG_F=1;
+  47   3        SMG_E=1;
+  48   3        SMG_G=0;
+  49   3        SMG_DG=0;
+  50   3          delayMs(1);
+  51   3        }
+  52   2        }
+  53   1      }
+  54          
+  55          //=============================================================================
+C51 COMPILER V9.60.0.0   MAIN                                                              01/02/2020 16:15:34 PAGE 2   
 
-  56   2            buzzCounter=100;
-  57   2            
-  58   2          }
-  59   1        }
-  60          //=============================================================================
-  61            void TaskSetting(){ 
-  62   1          if(D_keyValue1==keyValue){
-  63   2            P1MODL = 0xaa;
-  64   2            
-  65   2          }
-  66   1        } 
-  67          //=============================================================================
-  68            void TaskProcess(){
-  69   1      
-  70   1        }
-  71          //=============================================================================
-  72            void DisplayProcess(){
-  73   1        
-  74   1        }
-  75          //=============================================================================
-  76          //延时函数
-  77          void delayMs(uint16_t time){
-  78   1        uint16_t i,j;
-  79   1        for(i=0; i<time; i++){
-  80   2          for(j=0; j<1000; j++){
-  81   3            F_clearWDT();
-  82   3          }
-  83   2        }
-  84   1      }
-  85          
+  56            void TimeProcess(){
+  57   1          static uint8_t timer5ms = 0;
+  58   1      
+  59   1          if (b1ms) {
+  60   2            // 1ms 执�?�一�?
+  61   2            b1ms = 0;
+  62   2            timer5ms++;
+  63   2          }
+  64   1          if (timer5ms >= 5) {
+  65   2            P1MODL = 0x8a;
+  66   2            delayMs(20);
+  67   2            GetKeys();
+  68   2            buzzCounter=100;
+  69   2            
+  70   2          }
+  71   1        }
+  72          //=============================================================================
+  73            void TaskSetting(){ 
+  74   1          if(D_keyValue1==keyValue){
+  75   2            P1MODL = 0xaa;
+  76   2            
+  77   2          }
+  78   1        } 
+  79          //=============================================================================
+  80            void TaskProcess(){
+  81   1      
+  82   1        }
+  83          //=============================================================================
+  84            void DisplayProcess(){
+  85   1        
+  86   1        }
+  87          //=============================================================================
+  88          //延时函数
+  89          void delayMs(uint16_t time){
+  90   1        uint16_t i,j;
+  91   1        for(i=0; i<time; i++){
+  92   2          for(j=0; j<1000; j++){
+  93   3            F_clearWDT();
+  94   3          }
+  95   2        }
+  96   1      }
+  97          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    142    ----
+   CODE SIZE        =    207    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      2    ----
+   DATA SIZE        =      2       2
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
