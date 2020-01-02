@@ -9,12 +9,11 @@ void main() {
 
 	P_buzz = 0;
 
-	
-
 	delayMs(500);
 
-	P_ledcom=1;
-	
+	P_ledcom=0;
+	F_ledOff1();
+	F_ledOn2();
 	
 	while(1){
 		//清看门狗
@@ -24,7 +23,7 @@ void main() {
 		TaskSetting();
 		TaskProcess();
 		DisplayProcess();
-	    smg_double(0x3f,0x71);
+	    //smg_double(0x3f,0x71);
 	}
 }
 
@@ -38,19 +37,19 @@ void main() {
 			timer5ms++;
 		}
 		if (timer5ms >= 5) {
-			P1MODL = 0x8a;
-			delayMs(20);
 			GetKeys();
-      buzzCounter=100;
-			
+            buzzCounter=100;
+	
 		}
 	}
 //=============================================================================
 	void TaskSetting(){	
 		if(D_keyValue1==keyValue){
-			P1MODL = 0xaa;
 			
+			F_ledNeg2();
+
 		}
+		keyValue=D_keyNull;
 	} 
 //=============================================================================
 	void TaskProcess(){

@@ -23,15 +23,16 @@ void SysInit() {
   _nop_();
   _nop_();
   _nop_();
-  // IO 妯″紡鍒濆?嬪寲
-	P1MODL = 0xaa;		//灏嗘ā寮忕疆涓烘帹鎸借緭鍑?
+  // IO 口初始化
+	P1MODL = 0xaa;		//将模式设置为推挽输出
 	P1MODH = 0xaa;
-	//P1MODL = 0xa8;		//灏嗘ā寮忕疆涓轰笂鎷夎緭鍏?
+	//P1MODL = 0xa8;		//上拉输入
 	P1_2 = 1;
 
   smg_init();
 	
-	//T2鍒濆?嬪寲
+  // T2 ???  7.3728Mhz/2 = 3686400Hz
+  //  3686400Hz/3686.4 = 1000Hz = 1ms timer2 
 	TH2 = (65536 - 3686) / 256;
   RCP2H = TH2;
   TL2 = (65536 - 3686) % 256;
