@@ -2,10 +2,9 @@
 #include "includeAll.h"
 //=============================================================================
 void main() {
-	int a;
   SysInit();
   VarsInit();
-	//使能看门�?
+	//使能看门狗
 	F_turnOnWDT();
 
 	P_buzz = 0;
@@ -13,7 +12,7 @@ void main() {
 	
 
 	delayMs(500);
-	//P_D=0;
+
 	P_ledcom=1;
 	
 	
@@ -25,30 +24,7 @@ void main() {
 		TaskSetting();
 		TaskProcess();
 		DisplayProcess();
-		for(a=0;a<200000;a++){
-	SMG_COM1=0;
-	SMG_COM2=1;
-	SMG_A=1;
-	SMG_B=0;
-	SMG_C=0;
-	SMG_D=0;
-	SMG_F=1;
-	SMG_E=1;
-	SMG_G=1;
-	SMG_DG=0;
-	delayMs(1);
-    SMG_COM1=1;
-	SMG_COM2=0;
-	SMG_A=1;
-	SMG_B=1;
-	SMG_C=1;
-	SMG_D=1;
-	SMG_F=1;
-	SMG_E=1;
-	SMG_G=0;
-	SMG_DG=0;
-    delayMs(1);
-	}
+	    smg_double(0x3f,0x71);
 	}
 }
 
@@ -57,7 +33,7 @@ void main() {
 		static uint8_t timer5ms = 0;
 
 		if (b1ms) {
-			// 1ms 执�?�一�?
+			// 1ms 执行一次
 			b1ms = 0;
 			timer5ms++;
 		}

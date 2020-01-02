@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   INIT                                                              01/02/2020 16:15:34 PAGE 1   
+C51 COMPILER V9.60.0.0   INIT                                                              01/02/2020 17:26:19 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE INIT
@@ -62,7 +62,7 @@ line level    source
   53   1        P3MODH |= 0x2a;
   54   1        /*f 1.2||dg 1.3 */
   55   1        P1MODL &= 0x0f;
-C51 COMPILER V9.60.0.0   INIT                                                              01/02/2020 16:15:34 PAGE 2   
+C51 COMPILER V9.60.0.0   INIT                                                              01/02/2020 17:26:19 PAGE 2   
 
   56   1        P1MODL |= 0xa0;
   57   1        /*g 3.2*/

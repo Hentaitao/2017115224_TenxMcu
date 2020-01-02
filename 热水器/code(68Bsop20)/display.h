@@ -5,8 +5,7 @@
 #define P_led2 P1_2
 #define P_led1 P1_4
 #define P_buzz P1_5
-#define P_smgcom1 P1_1
-#define P_smgcom2 P1_6
+
 #define P_D P1_7
 // Const: exp: #define D_data 1 ----------------
 #define D_ledOn 1  //高电位亮

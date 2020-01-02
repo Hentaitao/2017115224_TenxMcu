@@ -441,6 +441,16 @@
               <FileType>1</FileType>
               <FilePath>.\buzz.c</FilePath>
             </File>
+            <File>
+              <FileName>isr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\isr.c</FilePath>
+            </File>
+            <File>
+              <FileName>smg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\smg.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

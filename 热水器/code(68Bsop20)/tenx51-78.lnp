@@ -3,7 +3,9 @@
 "init.obj",
 "main.obj",
 "keys.obj",
-"buzz.obj" 
+"buzz.obj",
+"isr.obj",
+"smg.obj" 
 TO "tenx51-78" 
 RAMSIZE(256) 
 CODE( 0x00-0x32,0x3b-0x0cff,0x1000-0x1ffd )

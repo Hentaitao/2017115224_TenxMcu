@@ -21,6 +21,7 @@
 // Action Macro: exp: #define F_getData() ------
 
 // Function ------------------------------------
-
+void smg_double(char x,char y);
+void smg_display(char x,uint8_t number);
 
 #endif

@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   MAIN                                                              01/02/2020 16:15:34 PAGE 1   
+C51 COMPILER V9.60.0.0   MAIN                                                              01/02/2020 17:26:19 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
@@ -11,109 +11,85 @@ line level    source
    2          #include "includeAll.h"
    3          //=============================================================================
    4          void main() {
-   5   1        int a;
-   6   1        SysInit();
-   7   1        VarsInit();
-   8   1        //使能看门�?
-   9   1        F_turnOnWDT();
-  10   1      
-  11   1        P_buzz = 0;
-  12   1      
-  13   1        
-  14   1      
-  15   1        delayMs(500);
-  16   1        //P_D=0;
-  17   1        P_ledcom=1;
+   5   1        SysInit();
+   6   1        VarsInit();
+   7   1        //使能看门狗
+   8   1        F_turnOnWDT();
+   9   1      
+  10   1        P_buzz = 0;
+  11   1      
+  12   1        
+  13   1      
+  14   1        delayMs(500);
+  15   1      
+  16   1        P_ledcom=1;
+  17   1        
   18   1        
-  19   1        
-  20   1        while(1){
-  21   2          //清看门狗
-  22   2          F_clearWDT();
-  23   2          //业务代码
-  24   2          TimeProcess();
-  25   2          TaskSetting();
-  26   2          TaskProcess();
-  27   2          DisplayProcess();
-  28   2          for(a=0;a<200000;a++){
-  29   3        SMG_COM1=0;
-  30   3        SMG_COM2=1;
-  31   3        SMG_A=1;
-  32   3        SMG_B=0;
-  33   3        SMG_C=0;
-  34   3        SMG_D=0;
-  35   3        SMG_F=1;
-  36   3        SMG_E=1;
-  37   3        SMG_G=1;
-  38   3        SMG_DG=0;
-  39   3        delayMs(1);
-  40   3          SMG_COM1=1;
-  41   3        SMG_COM2=0;
-  42   3        SMG_A=1;
-  43   3        SMG_B=1;
-  44   3        SMG_C=1;
-  45   3        SMG_D=1;
-  46   3        SMG_F=1;
-  47   3        SMG_E=1;
-  48   3        SMG_G=0;
-  49   3        SMG_DG=0;
-  50   3          delayMs(1);
-  51   3        }
-  52   2        }
-  53   1      }
-  54          
+  19   1        while(1){
+  20   2          //清看门狗
+  21   2          F_clearWDT();
+  22   2          //业务代码
+  23   2          TimeProcess();
+  24   2          TaskSetting();
+  25   2          TaskProcess();
+  26   2          DisplayProcess();
+  27   2            smg_double(0x3f,0x71);
+  28   2        }
+  29   1      }
+  30          
+  31          //=============================================================================
+  32            void TimeProcess(){
+  33   1          static uint8_t timer5ms = 0;
+  34   1      
+  35   1          if (b1ms) {
+  36   2            // 1ms 执行一次
+  37   2            b1ms = 0;
+  38   2            timer5ms++;
+  39   2          }
+  40   1          if (timer5ms >= 5) {
+  41   2            P1MODL = 0x8a;
+  42   2            delayMs(20);
+  43   2            GetKeys();
+  44   2            buzzCounter=100;
+  45   2            
+  46   2          }
+  47   1        }
+  48          //=============================================================================
+  49            void TaskSetting(){ 
+  50   1          if(D_keyValue1==keyValue){
+  51   2            P1MODL = 0xaa;
+  52   2            
+  53   2          }
+  54   1        } 
   55          //=============================================================================
-C51 COMPILER V9.60.0.0   MAIN                                                              01/02/2020 16:15:34 PAGE 2   
+C51 COMPILER V9.60.0.0   MAIN                                                              01/02/2020 17:26:19 PAGE 2   
 
-  56            void TimeProcess(){
-  57   1          static uint8_t timer5ms = 0;
-  58   1      
-  59   1          if (b1ms) {
-  60   2            // 1ms 执�?�一�?
-  61   2            b1ms = 0;
-  62   2            timer5ms++;
-  63   2          }
-  64   1          if (timer5ms >= 5) {
-  65   2            P1MODL = 0x8a;
-  66   2            delayMs(20);
-  67   2            GetKeys();
-  68   2            buzzCounter=100;
-  69   2            
-  70   2          }
-  71   1        }
-  72          //=============================================================================
-  73            void TaskSetting(){ 
-  74   1          if(D_keyValue1==keyValue){
-  75   2            P1MODL = 0xaa;
-  76   2            
-  77   2          }
-  78   1        } 
-  79          //=============================================================================
-  80            void TaskProcess(){
-  81   1      
-  82   1        }
-  83          //=============================================================================
-  84            void DisplayProcess(){
-  85   1        
-  86   1        }
-  87          //=============================================================================
-  88          //延时函数
-  89          void delayMs(uint16_t time){
-  90   1        uint16_t i,j;
-  91   1        for(i=0; i<time; i++){
-  92   2          for(j=0; j<1000; j++){
-  93   3            F_clearWDT();
-  94   3          }
-  95   2        }
-  96   1      }
-  97          
+  56            void TaskProcess(){
+  57   1      
+  58   1        }
+  59          //=============================================================================
+  60            void DisplayProcess(){
+  61   1        
+  62   1        }
+  63          //=============================================================================
+  64          //延时函数
+  65          void delayMs(uint16_t time){
+  66   1        uint16_t i,j;
+  67   1        for(i=0; i<time; i++){
+  68   2          for(j=0; j<1000; j++){
+  69   3            F_clearWDT();
+  70   3          }
+  71   2        }
+  72   1      }
+  73          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    207    ----
+   CODE SIZE        =    129    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      2       2
+   DATA SIZE        =      2    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
