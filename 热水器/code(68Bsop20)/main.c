@@ -38,7 +38,7 @@ void main() {
 		}
 		if (timer5ms >= 5) {
 			GetKeys();
-            buzzCounter=100;
+            
 	
 		}
 	}
