@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   MAIN                                                              12/18/2019 11:14:41 PAGE 1   
+C51 COMPILER V9.60.0.0   MAIN                                                              01/02/2020 15:59:54 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
@@ -13,41 +13,39 @@ line level    source
    4          void main() {
    5   1        SysInit();
    6   1        VarsInit();
-   7   1        //使能看门狗
+   7   1        //使能看门�?
    8   1        F_turnOnWDT();
-   9   1        modeValue = 1; //初始值为1
+   9   1      
   10   1        P_buzz = 0;
-  11   1        P_led1=0;
+  11   1      
   12   1        
-  13   1        P_led2=1;
-  14   1        //P_D=0;
-  15   1        P_ledcom=0;
-  16   1        P_smgcom1=1;
-  17   1        P_smgcom2=0;
-  18   1        /*
-  19   1        uint8_t i;
-  20   1      　uint8_t code duan_ma[]= { 0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x
-             -71};//共阴
-  21   1        //uint8_t code duan_ma[] = {0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,0x88,0x83,0xc6,0xa1,0x86,0x
-             -8e};//共阳
-  22   1      　　while(1) { 
-  23   1         P1=0xfe; 
-  24   1         for(i=1;i<<=6;i++) { 
-  25   1          P0=duan_ma[i];
-  26   1      　　  delay_ms(400);
-  27   1      　　  P1=(P1<<1)|0x01;
-  28   1      　　}
-  29   1      　　}
-  30   1        */
-  31   1        
-  32   1        while(1){
-  33   2          //清看门狗
-  34   2          F_clearWDT();
-  35   2          //业务代码
-  36   2          TimeProcess();
-  37   2          TaskSetting();
-  38   2          TaskProcess();
-  39   2          DisplayProcess();
+  13   1      
+  14   1        delayMs(500);
+  15   1        //P_D=0;
+  16   1        P_ledcom=1;
+  17   1        SMG_COM1=0;
+  18   1        SMG_COM2=1;
+  19   1        SMG_A=1;
+  20   1        SMG_B=1;
+  21   1        SMG_C=1;
+  22   1        SMG_D=1;
+  23   1        SMG_F=1;
+  24   1        SMG_E=1;
+  25   1        SMG_G=0;
+  26   1        SMG_DG=0;
+  27   1      
+  28   1      
+  29   1        
+  30   1        
+  31   1        while(1){
+  32   2          //清看门狗
+  33   2          F_clearWDT();
+  34   2          //业务代码
+  35   2          TimeProcess();
+  36   2          TaskSetting();
+  37   2          TaskProcess();
+  38   2          DisplayProcess();
+  39   2          
   40   2        }
   41   1      }
   42          
@@ -56,85 +54,50 @@ line level    source
   45   1          static uint8_t timer5ms = 0;
   46   1      
   47   1          if (b1ms) {
-  48   2            // 1ms 执行一次
+  48   2            // 1ms 执�?�一�?
   49   2            b1ms = 0;
   50   2            timer5ms++;
   51   2          }
   52   1          if (timer5ms >= 5) {
   53   2            P1MODL = 0x8a;
-C51 COMPILER V9.60.0.0   MAIN                                                              12/18/2019 11:14:41 PAGE 2   
+  54   2            delayMs(20);
+  55   2            GetKeys();
+C51 COMPILER V9.60.0.0   MAIN                                                              01/02/2020 15:59:54 PAGE 2   
 
-  54   2            GetKeys();
-  55   2            
-  56   2            //P_buzz = ~P_buzz;
-  57   2            //P_led1 = ~P_led1;
-  58   2            //P_led2 = ~P_led2;
-  59   2            //P_D = ~P_D;
-  60   2            
-  61   2          }
-  62   1        }
-  63          //=============================================================================
-  64            void TaskSetting(){ 
-  65   1        //**单端口复用控制LED亮灭**
-  66   1        if (modeValue == 1){//模式标志为1时，该模式为推挽输出
-  67   2          //LED状态转换
-  68   2          if(D_keyValue1 == keyValue){
-  69   3            Mode_Neg();   //模式标志为取反
-  70   3          }
-  71   2          P1MODL = 0xaa;    //将模式置为推挽输出，使LED显示
-  72   2          } else {//否则，该模式为上拉输入
-  73   2            if(D_keyValue1 == keyValue){
-  74   3              Mode_Neg();   
-  75   3            }
-  76   2          }
-  77   1        } 
-  78          //=============================================================================
-  79            void TaskProcess(){
-  80   1          //P_ledcom=0;
-  81   1          /*
-  82   1          P_led1=0;
-  83   1          P_led2=1;
-  84   1          delayMs(400);
-  85   1          P_led1=1;
-  86   1          P_led2=0;
-  87   1          delayMs(400);*/
-  88   1          /*
-  89   1          P_buzz=1;
-  90   1          delayMs(100);
-  91   1           P_buzz=0;
-  92   1          delayMs(50);
-  93   1          */
-  94   1          //P_D=1;
-  95   1        }
-  96          //=============================================================================
-  97            void DisplayProcess(){
-  98   1        
-  99   1        }
- 100          //=============================================================================
- 101          //延时函数
- 102          void delayMs(uint16_t time){
- 103   1        uint16_t i,j;
- 104   1        for(i=0; i<time; i++){
- 105   2          for(j=0; j<1000; j++){
- 106   3          }
- 107   2        }
- 108   1        //while(time--);
- 109   1      }
- 110          
- 111          //led数码管显示
- 112          void led_disp()
- 113          {
- 114   1        //com0_disp(buffer[3]);   //显示按键S4加1计数的值
- 115   1        //com1_disp(buffer[2]);   //显示按键S3加1计数的值
-C51 COMPILER V9.60.0.0   MAIN                                                              12/18/2019 11:14:41 PAGE 3   
-
- 116   1        //com2_disp(buffer[1]);   //显示AD转换值的高4位
- 117   1        //com3_disp(buffer[0]);   //显示AD转换值的低4位
- 118   1      }
+  56   2            buzzCounter=100;
+  57   2            
+  58   2          }
+  59   1        }
+  60          //=============================================================================
+  61            void TaskSetting(){ 
+  62   1          if(D_keyValue1==keyValue){
+  63   2            P1MODL = 0xaa;
+  64   2            
+  65   2          }
+  66   1        } 
+  67          //=============================================================================
+  68            void TaskProcess(){
+  69   1      
+  70   1        }
+  71          //=============================================================================
+  72            void DisplayProcess(){
+  73   1        
+  74   1        }
+  75          //=============================================================================
+  76          //延时函数
+  77          void delayMs(uint16_t time){
+  78   1        uint16_t i,j;
+  79   1        for(i=0; i<time; i++){
+  80   2          for(j=0; j<1000; j++){
+  81   3            F_clearWDT();
+  82   3          }
+  83   2        }
+  84   1      }
+  85          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    134    ----
+   CODE SIZE        =    142    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

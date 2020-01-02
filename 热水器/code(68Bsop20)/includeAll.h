@@ -8,4 +8,5 @@
 #include "isr.h"
 #include "main.h"
 #include "buzz.h"
+#include "smg.h"
 #include <INTRINS.H>
