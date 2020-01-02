@@ -18,9 +18,14 @@
 #endif
 
 // Action Macro: exp: #define F_getData() ------
-#define F_ledOn() P_led = D_ledOn
-#define F_ledOff() P_led = D_ledOff
-#define F_ledNeg() P_led = ~P_led
+#define F_ledOn1() P_led1 = D_ledOn
+#define F_ledOff1() P_led1 = D_ledOff
+#define F_ledNeg1() P_led1 = ~P_led1
+
+#define F_ledOn2() P_led2 = D_ledOn
+#define F_ledOff2() P_led2 = D_ledOff
+#define F_ledNeg2() P_led2 = ~P_led2
+
 // Function ------------------------------------
 
 #endif
