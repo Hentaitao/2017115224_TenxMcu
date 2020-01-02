@@ -2,6 +2,7 @@
 #include "includeAll.h"
 //=============================================================================
 void main() {
+	int a;
   SysInit();
   VarsInit();
 	//使能看门�?
@@ -14,18 +15,6 @@ void main() {
 	delayMs(500);
 	//P_D=0;
 	P_ledcom=1;
-	SMG_COM1=0;
-	SMG_COM2=1;
-	SMG_A=1;
-	SMG_B=1;
-	SMG_C=1;
-	SMG_D=1;
-	SMG_F=1;
-	SMG_E=1;
-	SMG_G=0;
-	SMG_DG=0;
-
-
 	
 	
 	while(1){
@@ -36,7 +25,30 @@ void main() {
 		TaskSetting();
 		TaskProcess();
 		DisplayProcess();
-		
+		for(a=0;a<200000;a++){
+	SMG_COM1=0;
+	SMG_COM2=1;
+	SMG_A=1;
+	SMG_B=0;
+	SMG_C=0;
+	SMG_D=0;
+	SMG_F=1;
+	SMG_E=1;
+	SMG_G=1;
+	SMG_DG=0;
+	delayMs(1);
+    SMG_COM1=1;
+	SMG_COM2=0;
+	SMG_A=1;
+	SMG_B=1;
+	SMG_C=1;
+	SMG_D=1;
+	SMG_F=1;
+	SMG_E=1;
+	SMG_G=0;
+	SMG_DG=0;
+    delayMs(1);
+	}
 	}
 }
 
