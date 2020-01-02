@@ -15,5 +15,6 @@
 // Function ------------------------------------
 void SysInit();
 void VarsInit();
+void smg_init();
 
 #endif
