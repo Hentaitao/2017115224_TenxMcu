@@ -45,12 +45,10 @@ void main() {
 	}
 //=============================================================================
 	void TaskSetting(){	
-		if(D_keyValue1==keyValue){
+		if(D_keyValue1==keyValue3){
 			
 			F_ledNeg2();
-			
-			buzzCounter=100;
-
+            buzzCounter=1000;
 		}
 	/*	else if (D_keyValue1==keyValue&&ledValue2==0)
 		{
@@ -63,7 +61,7 @@ void main() {
 			;
 		}*/
 		
-		keyValue=D_keyNull;
+		keyValue3=D_keyNull;
 	} 
 //=============================================================================
 	void TaskProcess(){
