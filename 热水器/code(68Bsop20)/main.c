@@ -50,16 +50,10 @@ void main() {
 			F_ledNeg2();
             buzzCounter=1000;
 		}
-	/*	else if (D_keyValue1==keyValue&&ledValue2==0)
-		{
-			F_ledOn2();
-			ledValue2=1;
-			buzzCounter=100;
+	    if(D_keyValue1==keyValue2){
+			F_ledNeg1();
+            buzzCounter=1000;
 		}
-		else
-		{
-			;
-		}*/
 		
 		keyValue3=D_keyNull;
 	} 
