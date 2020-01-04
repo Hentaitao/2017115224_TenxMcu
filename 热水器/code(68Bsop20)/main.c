@@ -1,7 +1,9 @@
 #define __main_c
 #include "includeAll.h"
 //=============================================================================
+uint8_t ledValue2=1;//led2亮与否1/0
 void main() {
+  
   SysInit();
   VarsInit();
 	//使能看门狗
@@ -23,32 +25,43 @@ void main() {
 		TaskSetting();
 		TaskProcess();
 		DisplayProcess();
-	    //smg_double(0x3f,0x71);
+	   // smg_double(0x3f,0x71);
 	}
 }
 
 //=============================================================================
 	void TimeProcess(){
 		static uint8_t timer5ms = 0;
-
+		
 		if (b1ms) {
 			// 1ms 执行一次
 			b1ms = 0;
 			timer5ms++;
 		}
 		if (timer5ms >= 5) {
+
 			GetKeys();
-            
-	
+
 		}
 	}
 //=============================================================================
 	void TaskSetting(){	
-		if(D_keyValue1==keyValue){
+		if(D_keyValue1==keyValue&&ledValue2==1){
 			
-			F_ledNeg2();
+			F_ledOff2();
+			~ledValue2;
 
 		}
+		else if (D_keyValue1==keyValue&&ledValue2==0)
+		{
+			F_ledOn2();
+			~ledValue2;
+		}
+		else
+		{
+			;
+		}
+		
 		keyValue=D_keyNull;
 	} 
 //=============================================================================
