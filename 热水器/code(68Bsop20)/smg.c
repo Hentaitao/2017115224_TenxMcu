@@ -81,11 +81,25 @@ void smg_display(char x,uint8_t number){
 *左管显示x，右管显示y*
 */
 void smg_double(char x,char y){
-    uint8_t a;
-    for(a=0;a<2000000;a++){
+    uint8_t a,b;
+    for(a=0;a<10000;a++){
+    for(b=0;b<50;b++){
         smg_display(x,2);
         delayMs(1);
         smg_display(y,1);
         delayMs(1);
     }
+    delayMs(50);
+    GetKeys();
+    if(keyValue2==D_keyValue1){
+        break;
+    }
+    }
+
+}
+
+/*关闭数码管*/
+void smg_close(){
+  SMG_COM1=1;
+  SMG_COM2=1;
 }

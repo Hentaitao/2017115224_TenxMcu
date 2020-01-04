@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   MAIN                                                              01/04/2020 22:17:02 PAGE 1   
+C51 COMPILER V9.60.0.0   MAIN                                                              01/04/2020 23:35:38 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
@@ -10,12 +10,12 @@ line level    source
    1          #define __main_c
    2          #include "includeAll.h"
    3          //=============================================================================
-   4          uint8_t ledValue2=0;//led2亮与否1/0
+   4          uint8_t ledValue2=0;//led2�?与否1/0
    5          void main() {
    6   1        
    7   1        SysInit();
    8   1        VarsInit();
-   9   1        //使能看门狗
+   9   1        //使能看门�?
   10   1        F_turnOnWDT();
   11   1      
   12   1        P_buzz = 0;
@@ -25,7 +25,7 @@ line level    source
   16   1        P_ledcom=0;
   17   1        F_ledOff1();
   18   1        F_ledOff2();
-  19   1        
+  19   1          smg_init();
   20   1        while(1){
   21   2          //清看门狗
   22   2          F_clearWDT();
@@ -34,7 +34,7 @@ line level    source
   25   2          TaskSetting();
   26   2          TaskProcess();
   27   2          DisplayProcess();
-  28   2           // smg_double(0x3f,0x71);
+  28   2            
   29   2        }
   30   1      }
   31          
@@ -43,7 +43,7 @@ line level    source
   34   1          static uint8_t timer5ms = 0;
   35   1          
   36   1          if (b1ms) {
-  37   2            // 1ms 执行一次
+  37   2            // 1ms 执�?�一�?
   38   2            b1ms = 0;
   39   2            timer5ms++;
   40   2          }
@@ -53,50 +53,66 @@ line level    source
   44   2          }
   45   1        }
   46          //=============================================================================
-  47            void TaskSetting(){ 
-  48   1          if(D_keyValue1==keyValue3){
-  49   2            
-  50   2            F_ledNeg2();
-  51   2                  buzzCounter=1000;
-  52   2          }
-  53   1            if(D_keyValue1==keyValue2){
-  54   2            F_ledNeg1();
-  55   2                  buzzCounter=1000;
-C51 COMPILER V9.60.0.0   MAIN                                                              01/04/2020 22:17:02 PAGE 2   
+  47          bit smgval=0;
+  48            void TaskSetting(){ 
+  49   1          if(D_keyValue1==keyValue3){
+  50   2            led_init();
+  51   2            F_ledNeg2();
+  52   2                  buzzCounter=1000;
+  53   2          }
+  54   1            if(D_keyValue1==keyValue2){
+  55   2            
+C51 COMPILER V9.60.0.0   MAIN                                                              01/04/2020 23:35:38 PAGE 2   
 
-  56   2          }
-  57   1          
-  58   1          keyValue3=D_keyNull;
-  59   1        } 
-  60          //=============================================================================
-  61            void TaskProcess(){
-  62   1      
-  63   1        }
-  64          //=============================================================================
-  65            void DisplayProcess(){
-  66   1        
-  67   1        }
-  68          //=============================================================================
-  69          //延时函数
-  70          void delayMs(uint16_t time){
-  71   1        uint16_t i,j;
-  72   1        for(i=0; i<time; i++){
-  73   2          for(j=0; j<1000; j++){
-  74   3            F_clearWDT();
-  75   3          }
-  76   2        }
-  77   1      }
-  78          
+  56   2            smg_init();
+  57   2            buzzCounter=1000;
+  58   2            
+  59   2            if (smgval==0)
+  60   2            {
+  61   3              smg_double(0x3f,0x71);
+  62   3              smgval=1;
+  63   3            }else
+  64   2            {
+  65   3              smg_close();
+  66   3              smgval=0;
+  67   3            }
+  68   2            smg_init();
+  69   2                  
+  70   2          }
+  71   1      
+  72   1          keyValue3=D_keyNull;
+  73   1          keyValue2=D_keyNull;
+  74   1          keyValue4=D_keyNull;
+  75   1        } 
+  76          //=============================================================================
+  77            void TaskProcess(){
+  78   1      
+  79   1        }
+  80          //=============================================================================
+  81            void DisplayProcess(){
+  82   1        
+  83   1        }
+  84          //=============================================================================
+  85          //延时函数
+  86          void delayMs(uint16_t time){
+  87   1        uint16_t i,j;
+  88   1        for(i=0; i<time; i++){
+  89   2          for(j=0; j<1000; j++){
+  90   3            F_clearWDT();
+  91   3          }
+  92   2        }
+  93   1      }
+  94          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    129    ----
+   CODE SIZE        =    162    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =      2    ----
    IDATA SIZE       =   ----    ----
-   BIT SIZE         =   ----    ----
+   BIT SIZE         =      1    ----
 END OF MODULE INFORMATION.
 
 

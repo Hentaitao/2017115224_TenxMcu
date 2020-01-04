@@ -12,6 +12,8 @@ void GetKeys() {
 	P3MODH &= P34MOD_Mask;
 	P3MODL &= P32MOD_Mask;
 	P1MODL &= P12MOD_Mask;
+
+
 	_nop_();
 	_nop_();
 	_nop_();
