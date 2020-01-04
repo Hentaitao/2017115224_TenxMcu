@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   KEYS                                                              01/04/2020 20:54:46 PAGE 1   
+C51 COMPILER V9.60.0.0   KEYS                                                              01/04/2020 21:39:34 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE KEYS
@@ -13,22 +13,21 @@ line level    source
    4          //按键信息获取
    5          void GetKeys() {
    6   1        static uint8_t tempKeyValue = D_keyNull;
-   7   1        
-   8   1        P1MODL = 0x8a;
+   7   1      
+   8   1          P1MODH &= P17MOD_Mask;
    9   1        _nop_();
   10   1        _nop_();
   11   1        _nop_();
-  12   1        _nop_();
-  13   1        _nop_();
-  14   1      
-  15   1        if(P_key4 == 0){
-  16   2          tempKeyValue = D_keyValue1;
-  17   2        } else{
-  18   2          keyValue = tempKeyValue;
-  19   2          tempKeyValue = D_keyNull;
-  20   2        }
-  21   1        P1MODL = 0xaa;
-  22   1      }
+  12   1          _nop_();
+  13   1          _nop_();
+  14   1        if(P_key3 == 0){
+  15   2          tempKeyValue = D_keyValue1;
+  16   2        } else{
+  17   2          keyValue = tempKeyValue;
+  18   2          tempKeyValue = D_keyNull;
+  19   2        }
+  20   1        P1MODH |= P17MOD_2;
+  21   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

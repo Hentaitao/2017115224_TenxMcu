@@ -1,7 +1,7 @@
 #define __main_c
 #include "includeAll.h"
 //=============================================================================
-uint8_t ledValue2=1;//led2亮与否1/0
+uint8_t ledValue2=0;//led2亮与否1/0
 void main() {
   
   SysInit();
@@ -15,7 +15,7 @@ void main() {
 
 	P_ledcom=0;
 	F_ledOff1();
-	F_ledOn2();
+	F_ledOff2();
 	
 	while(1){
 		//清看门狗
@@ -39,28 +39,29 @@ void main() {
 			timer5ms++;
 		}
 		if (timer5ms >= 5) {
-
+            
 			GetKeys();
-
 		}
 	}
 //=============================================================================
 	void TaskSetting(){	
-		if(D_keyValue1==keyValue&&ledValue2==1){
+		if(D_keyValue1==keyValue){
 			
-			F_ledOff2();
-			~ledValue2;
+			F_ledNeg2();
+			
+			buzzCounter=100;
 
 		}
-		else if (D_keyValue1==keyValue&&ledValue2==0)
+	/*	else if (D_keyValue1==keyValue&&ledValue2==0)
 		{
 			F_ledOn2();
-			~ledValue2;
+			ledValue2=1;
+			buzzCounter=100;
 		}
 		else
 		{
 			;
-		}
+		}*/
 		
 		keyValue=D_keyNull;
 	} 

@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   INIT                                                              01/04/2020 20:54:45 PAGE 1   
+C51 COMPILER V9.60.0.0   INIT                                                              01/04/2020 21:39:33 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE INIT
@@ -36,44 +36,71 @@ line level    source
   27   1        P1MODL = 0xaa;    //将模式设置为推挽输出
   28   1        P1MODH = 0xaa;
   29   1        //P1MODL = 0xa8;    //上拉输入
-  30   1        P1_2 = 1;
-  31   1      
+  30   1      
+  31   1        
   32   1        smg_init();
-  33   1        
-  34   1        // T2 ???  7.3728Mhz/2 = 3686400Hz
-  35   1        //  3686400Hz/3686.4 = 1000Hz = 1ms timer2 
-  36   1        TH2 = (65536 - 922) / 256;
-  37   1        RCP2H = TH2;
-  38   1        TL2 = (65536 - 922) % 256;
-  39   1        RCP2L = TL2;
-  40   1        TR2 = 1;
-  41   1        ET2 = 1;
-  42   1        EA = 1; 
-  43   1      }
-  44          //=============================================================================
-  45          void VarsInit() {}
-  46          
-  47          /*数码管初始化，将a~dg设为推挽输出*/
-  48          void smg_init(){
-  49   1        /*a 1.4 || d 1.7 */
-  50   1        P1MODH &= 0x3c;
-  51   1        P1MODH |= 0x82;
-  52   1        /*b 3.4 || c 3.5 || e 3.6*/
-  53   1        P3MODH &= 0x00;
-  54   1        P3MODH |= 0x2a;
-  55   1        /*f 1.2||dg 1.3 */
-C51 COMPILER V9.60.0.0   INIT                                                              01/04/2020 20:54:45 PAGE 2   
+  33   1        KeyInit();
+  34   1        led_init();
+  35   1        // T2 ???  7.3728Mhz/2 = 3686400Hz
+  36   1        //  3686400Hz/3686.4 = 1000Hz = 1ms timer2 
+  37   1        TH2 = (65536 - 922) / 256;
+  38   1        RCP2H = TH2;
+  39   1        TL2 = (65536 - 922) % 256;
+  40   1        RCP2L = TL2;
+  41   1        TR2 = 1;
+  42   1        ET2 = 1;
+  43   1        EA = 1; 
+  44   1      }
+  45          //=============================================================================
+  46          void VarsInit() {}
+  47          
+  48          /*数码管初始化，将a~dg设为推挽输出*/
+  49          void smg_init(){
+  50   1        /*a 1.4 || d 1.7 */
+  51   1        P1MODH &= 0x3c;
+  52   1        P1MODH |= 0x82;
+  53   1        /*b 3.4 || c 3.5 || e 3.6*/
+  54   1        P3MODH &= 0x00;
+  55   1        P3MODH |= 0x2a;
+C51 COMPILER V9.60.0.0   INIT                                                              01/04/2020 21:39:33 PAGE 2   
 
-  56   1        P1MODL &= 0x0f;
-  57   1        P1MODL |= 0xa0;
-  58   1        /*g 3.2*/
-  59   1        P3MODL &= 0xcf;
-  60   1        P3MODL |= 0x20;
-  61   1      }
+  56   1        /*f 1.2||dg 1.3 */
+  57   1        P1MODL &= 0x0f;
+  58   1        P1MODL |= 0xa0;
+  59   1        /*g 3.2*/
+  60   1        P3MODL &= 0xcf;
+  61   1        P3MODL |= 0x20;
+  62   1      }
+  63          
+  64          void led_init(){
+  65   1        P1MODL &= P12MOD_Mask;
+  66   1        P1MODL |= P12MOD_2;
+  67   1      
+  68   1        P1MODH &= P14MOD_Mask;
+  69   1        P1MODH |= P14MOD_2;
+  70   1      }
+  71          void KeyInit()
+  72          {
+  73   1        /* key 1 */
+  74   1        P3MODH &= P34MOD_Mask;
+  75   1        P3MODH |= P34MOD_0;
+  76   1      
+  77   1        /* key 2 */
+  78   1        P3MODL &= P32MOD_Mask;
+  79   1        P3MODL |= P32MOD_0;
+  80   1      
+  81   1        /* key 3 */
+  82   1        P1MODH &= P17MOD_Mask;
+  83   1        P1MODH |= P17MOD_0;
+  84   1      
+  85   1        /* key 4 */
+  86   1        P1MODL &= P12MOD_Mask;
+  87   1        P1MODL |= P12MOD_0;
+  88   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     82    ----
+   CODE SIZE        =    112    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

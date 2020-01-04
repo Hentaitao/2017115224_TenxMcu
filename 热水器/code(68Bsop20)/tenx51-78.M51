@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    01/04/2020  20:54:46  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    01/04/2020  21:39:35  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
@@ -59,7 +59,7 @@ LINK MAP OF MODULE:  tenx51-78 (?C_STARTUP)
             CODE    0029H     0001H     UNIT         ?PR?TIMER3_INT?ISR
             CODE    002AH     0001H     UNIT         ?PR?P1_INT?ISR
             CODE    002BH     0003H     ABSOLUTE     
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  20:54:46  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  21:39:35  PAGE 2
 
 
             CODE    002EH     0003H     UNIT         ?PR?TIMER0_INT?ISR
@@ -77,16 +77,18 @@ LINK MAP OF MODULE:  tenx51-78 (?C_STARTUP)
             CODE    0053H     0003H     ABSOLUTE     
             CODE    0056H     008CH     UNIT         ?C_C51STARTUP
             CODE    00E2H     0066H     UNIT         ?PR?_SMG_DISPLAY?SMG
-            CODE    0148H     003BH     UNIT         ?PR?_SMG_DOUBLE?SMG
-            CODE    0183H     0038H     UNIT         ?PR?SYSINIT?INIT
-            CODE    01BBH     002DH     UNIT         ?PR?MAIN?MAIN
-            CODE    01E8H     0023H     UNIT         ?PR?TASKSETTING?MAIN
-            CODE    020BH     0022H     UNIT         ?PR?_DELAYMS?MAIN
-            CODE    022DH     001AH     UNIT         ?PR?GETKEYS?KEYS
-            CODE    0247H     0019H     UNIT         ?PR?SMG_INIT?INIT
-            CODE    0260H     0018H     UNIT         ?PR?TIMEPROCESS?MAIN
-            CODE    0278H     0016H     UNIT         ?C?LIB_CODE
-            CODE    028EH     0014H     UNIT         ?C_INITSEG
+            CODE    0148H     003CH     UNIT         ?PR?SYSINIT?INIT
+            CODE    0184H     003BH     UNIT         ?PR?_SMG_DOUBLE?SMG
+            CODE    01BFH     002DH     UNIT         ?PR?MAIN?MAIN
+            CODE    01ECH     0022H     UNIT         ?PR?_DELAYMS?MAIN
+            CODE    020EH     001AH     UNIT         ?PR?GETKEYS?KEYS
+            CODE    0228H     0019H     UNIT         ?PR?SMG_INIT?INIT
+            CODE    0241H     0016H     UNIT         ?PR?TIMEPROCESS?MAIN
+            CODE    0257H     0016H     UNIT         ?C?LIB_CODE
+            CODE    026DH     0014H     UNIT         ?C_INITSEG
+            CODE    0281H     000FH     UNIT         ?PR?TASKSETTING?MAIN
+            CODE    0290H     000DH     UNIT         ?PR?LED_INIT?INIT
+            CODE    029DH     000DH     UNIT         ?PR?KEYINIT?INIT
 
 
 
@@ -111,16 +113,18 @@ SEGMENT
 
 ?PR?SYSINIT?INIT
   +--> ?PR?SMG_INIT?INIT
+  +--> ?PR?KEYINIT?INIT
+  +--> ?PR?LED_INIT?INIT
 
 ?PR?TIMEPROCESS?MAIN
   +--> ?PR?GETKEYS?KEYS
 
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  21:39:35  PAGE 3
+
+
 
 
 SYMBOL TABLE OF MODULE:  tenx51-78 (?C_STARTUP)
-
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  20:54:46  PAGE 3
-
 
   VALUE           TYPE          NAME
   ----------------------------------
@@ -175,20 +179,19 @@ SYMBOL TABLE OF MODULE:  tenx51-78 (?C_STARTUP)
   D:00D8H         PUBLIC        CLKCON
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  21:39:35  PAGE 4
+
+
   -------         ENDMOD        DISPLAY
 
   -------         MODULE        INIT
   C:0000H         SYMBOL        _ICE_DUMMY_
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  20:54:46  PAGE 4
-
-
   D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
   B:00A8H.7       PUBLIC        EA
   D:00A8H         PUBLIC        IE
-  B:0090H.2       PUBLIC        P1_2
   D:00B8H         PUBLIC        IP
   D:00F8H         PUBLIC        AUX1
   D:00A3H         PUBLIC        P1MODH
@@ -200,78 +203,105 @@ SYMBOL TABLE OF MODULE:  tenx51-78 (?C_STARTUP)
   D:0088H         PUBLIC        TCON
   B:00D8H.2       PUBLIC        SELFCK
   D:00D8H         PUBLIC        CLKCON
+  C:029DH         PUBLIC        KeyInit
   B:00A8H.5       PUBLIC        ET2
+  C:0290H         PUBLIC        led_init
   B:00D8H.3       PUBLIC        STPFCK
   D:00CDH         PUBLIC        TH2
   B:00F8H.7       PUBLIC        CLRWDT
   D:00CCH         PUBLIC        TL2
-  C:0183H         PUBLIC        SysInit
+  C:0148H         PUBLIC        SysInit
   B:00D8H.4       PUBLIC        STPPCK
   B:00C8H.2       PUBLIC        TR2
-  C:0247H         PUBLIC        smg_init
+  C:0228H         PUBLIC        smg_init
   D:00CBH         PUBLIC        RCP2H
   D:00CAH         PUBLIC        RCP2L
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
   -------         PROC          SYSINIT
-  C:0183H         LINE#         4
-  C:0183H         LINE#         5
-  C:0185H         LINE#         7
-  C:0188H         LINE#         8
-  C:018AH         LINE#         9
-  C:018CH         LINE#         10
-  C:018DH         LINE#         11
-  C:018EH         LINE#         12
-  C:018FH         LINE#         13
-  C:0190H         LINE#         14
-  C:0191H         LINE#         15
-  C:0193H         LINE#         16
-  C:0194H         LINE#         17
-  C:0195H         LINE#         18
-  C:0196H         LINE#         19
-  C:0197H         LINE#         20
-  C:0198H         LINE#         21
-  C:0199H         LINE#         22
-  C:019AH         LINE#         23
-  C:019BH         LINE#         24
-  C:019CH         LINE#         25
-  C:019DH         LINE#         27
-  C:01A0H         LINE#         28
-  C:01A3H         LINE#         30
-  C:01A5H         LINE#         32
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  20:54:46  PAGE 5
+  C:0148H         LINE#         4
+  C:0148H         LINE#         5
+  C:014AH         LINE#         7
+  C:014DH         LINE#         8
+  C:014FH         LINE#         9
+  C:0151H         LINE#         10
+  C:0152H         LINE#         11
+  C:0153H         LINE#         12
+  C:0154H         LINE#         13
+  C:0155H         LINE#         14
+  C:0156H         LINE#         15
+  C:0158H         LINE#         16
+  C:0159H         LINE#         17
+  C:015AH         LINE#         18
+  C:015BH         LINE#         19
+  C:015CH         LINE#         20
+  C:015DH         LINE#         21
+  C:015EH         LINE#         22
+  C:015FH         LINE#         23
+  C:0160H         LINE#         24
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  21:39:35  PAGE 5
 
 
-  C:01A8H         LINE#         36
-  C:01ABH         LINE#         37
-  C:01AEH         LINE#         38
-  C:01B1H         LINE#         39
-  C:01B4H         LINE#         40
-  C:01B6H         LINE#         41
-  C:01B8H         LINE#         42
-  C:01BAH         LINE#         43
+  C:0161H         LINE#         25
+  C:0162H         LINE#         27
+  C:0165H         LINE#         28
+  C:0168H         LINE#         32
+  C:016BH         LINE#         33
+  C:016EH         LINE#         34
+  C:0171H         LINE#         37
+  C:0174H         LINE#         38
+  C:0177H         LINE#         39
+  C:017AH         LINE#         40
+  C:017DH         LINE#         41
+  C:017FH         LINE#         42
+  C:0181H         LINE#         43
+  C:0183H         LINE#         44
   -------         ENDPROC       SYSINIT
   -------         PROC          VARSINIT
-  C:001AH         LINE#         45
+  C:001AH         LINE#         46
   -------         ENDPROC       VARSINIT
   -------         PROC          SMG_INIT
-  C:0247H         LINE#         48
-  C:0247H         LINE#         50
-  C:024AH         LINE#         51
-  C:024DH         LINE#         53
-  C:0250H         LINE#         54
-  C:0253H         LINE#         56
-  C:0256H         LINE#         57
-  C:0259H         LINE#         59
-  C:025CH         LINE#         60
-  C:025FH         LINE#         61
+  C:0228H         LINE#         49
+  C:0228H         LINE#         51
+  C:022BH         LINE#         52
+  C:022EH         LINE#         54
+  C:0231H         LINE#         55
+  C:0234H         LINE#         57
+  C:0237H         LINE#         58
+  C:023AH         LINE#         60
+  C:023DH         LINE#         61
+  C:0240H         LINE#         62
   -------         ENDPROC       SMG_INIT
+  -------         PROC          LED_INIT
+  C:0290H         LINE#         64
+  C:0290H         LINE#         65
+  C:0293H         LINE#         66
+  C:0296H         LINE#         68
+  C:0299H         LINE#         69
+  C:029CH         LINE#         70
+  -------         ENDPROC       LED_INIT
+  -------         PROC          KEYINIT
+  C:029DH         LINE#         71
+  C:029DH         LINE#         72
+  C:029DH         LINE#         74
+  C:02A0H         LINE#         75
+  C:02A0H         LINE#         78
+  C:02A3H         LINE#         79
+  C:02A3H         LINE#         82
+  C:02A6H         LINE#         83
+  C:02A6H         LINE#         86
+  C:02A9H         LINE#         87
+  C:02A9H         LINE#         88
+  -------         ENDPROC       KEYINIT
   -------         ENDMOD        INIT
 
   -------         MODULE        MAIN
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  21:39:35  PAGE 6
+
+
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
   D:00A8H         PUBLIC        IE
@@ -281,71 +311,63 @@ SYMBOL TABLE OF MODULE:  tenx51-78 (?C_STARTUP)
   B:0090H.5       PUBLIC        P1_5
   D:00B8H         PUBLIC        IP
   D:00F8H         PUBLIC        AUX1
-  C:01BBH         PUBLIC        main
+  C:01BFH         PUBLIC        main
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
   D:00D8H         PUBLIC        CLKCON
   C:0022H         PUBLIC        DisplayProcess
   B:00F8H.7       PUBLIC        CLRWDT
-  C:020BH         PUBLIC        _delayMs
+  C:01ECH         PUBLIC        _delayMs
   D:00C8H         PUBLIC        T2CON
   D:0014H         PUBLIC        ledValue2
   D:00F7H         PUBLIC        CFGWL
-  C:0260H         PUBLIC        TimeProcess
-  C:01E8H         PUBLIC        TaskSetting
+  C:0241H         PUBLIC        TimeProcess
+  C:0281H         PUBLIC        TaskSetting
   C:0021H         PUBLIC        TaskProcess
   D:00D0H         PUBLIC        PSW
   -------         PROC          MAIN
-  C:01BBH         LINE#         5
-  C:01BBH         LINE#         7
-  C:01BEH         LINE#         8
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  20:54:46  PAGE 6
-
-
-  C:01C1H         LINE#         10
-  C:01C9H         LINE#         12
-  C:01CBH         LINE#         14
-  C:01D2H         LINE#         16
-  C:01D4H         LINE#         17
-  C:01D6H         LINE#         18
-  C:01D8H         LINE#         20
-  C:01D8H         LINE#         22
-  C:01DAH         LINE#         24
-  C:01DDH         LINE#         25
-  C:01E0H         LINE#         26
-  C:01E3H         LINE#         27
-  C:01E6H         LINE#         29
+  C:01BFH         LINE#         5
+  C:01BFH         LINE#         7
+  C:01C2H         LINE#         8
+  C:01C5H         LINE#         10
+  C:01CDH         LINE#         12
+  C:01CFH         LINE#         14
+  C:01D6H         LINE#         16
+  C:01D8H         LINE#         17
+  C:01DAH         LINE#         18
+  C:01DCH         LINE#         20
+  C:01DCH         LINE#         22
+  C:01DEH         LINE#         24
+  C:01E1H         LINE#         25
+  C:01E4H         LINE#         26
+  C:01E7H         LINE#         27
+  C:01EAH         LINE#         29
   -------         ENDPROC       MAIN
   -------         PROC          TIMEPROCESS
   -------         DO            
   D:0013H         SYMBOL        timer5ms
   -------         ENDDO         
-  C:0260H         LINE#         33
-  C:0260H         LINE#         36
-  C:0263H         LINE#         38
-  C:0265H         LINE#         39
-  C:0267H         LINE#         40
-  C:0267H         LINE#         41
-  C:0272H         LINE#         42
-  C:0274H         LINE#         43
-  C:0277H         LINE#         46
-  C:0277H         LINE#         47
+  C:0241H         LINE#         33
+  C:0241H         LINE#         36
+  C:0244H         LINE#         38
+  C:0246H         LINE#         39
+  C:0248H         LINE#         40
+  C:0248H         LINE#         41
+  C:0253H         LINE#         43
+  C:0256H         LINE#         44
+  C:0256H         LINE#         45
   -------         ENDPROC       TIMEPROCESS
   -------         PROC          TASKSETTING
-  C:01E8H         LINE#         49
-  C:01E8H         LINE#         50
-  C:01F7H         LINE#         52
-  C:01F9H         LINE#         53
-  C:01F9H         LINE#         55
-  C:01FBH         LINE#         56
-  C:0205H         LINE#         57
-  C:0205H         LINE#         58
-  C:0207H         LINE#         59
-  C:0207H         LINE#         60
-  C:0207H         LINE#         62
-  C:0207H         LINE#         64
-  C:0207H         LINE#         66
-  C:020AH         LINE#         67
+  C:0281H         LINE#         47
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  21:39:35  PAGE 7
+
+
+  C:0281H         LINE#         48
+  C:0287H         LINE#         50
+  C:0289H         LINE#         52
+  C:028CH         LINE#         54
+  C:028CH         LINE#         66
+  C:028FH         LINE#         67
   -------         ENDPROC       TASKSETTING
   -------         PROC          TASKPROCESS
   C:0021H         LINE#         69
@@ -359,18 +381,15 @@ SYMBOL TABLE OF MODULE:  tenx51-78 (?C_STARTUP)
   D:0006H         SYMBOL        time
   -------         DO            
   D:0004H         SYMBOL        i
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  20:54:46  PAGE 7
-
-
   D:0002H         SYMBOL        j
   -------         ENDDO         
-  C:020BH         LINE#         78
-  C:020BH         LINE#         80
-  C:0215H         LINE#         81
-  C:0218H         LINE#         82
-  C:021AH         LINE#         83
-  C:0225H         LINE#         84
-  C:022CH         LINE#         85
+  C:01ECH         LINE#         78
+  C:01ECH         LINE#         80
+  C:01F6H         LINE#         81
+  C:01F9H         LINE#         82
+  C:01FBH         LINE#         83
+  C:0206H         LINE#         84
+  C:020DH         LINE#         85
   -------         ENDPROC       _DELAYMS
   -------         ENDMOD        MAIN
 
@@ -381,14 +400,14 @@ SYMBOL TABLE OF MODULE:  tenx51-78 (?C_STARTUP)
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
   D:00A8H         PUBLIC        IE
-  B:0090H.2       PUBLIC        P1_2
+  B:0090H.7       PUBLIC        P1_7
   D:00B8H         PUBLIC        IP
   D:00F8H         PUBLIC        AUX1
-  D:00A2H         PUBLIC        P1MODL
+  D:00A3H         PUBLIC        P1MODH
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
   D:00D8H         PUBLIC        CLKCON
-  C:022DH         PUBLIC        GetKeys
+  C:020EH         PUBLIC        GetKeys
   D:0016H         PUBLIC        keyValue
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
@@ -396,21 +415,24 @@ SYMBOL TABLE OF MODULE:  tenx51-78 (?C_STARTUP)
   -------         DO            
   D:0015H         SYMBOL        tempKeyValue
   -------         ENDDO         
-  C:022DH         LINE#         5
-  C:022DH         LINE#         8
-  C:0230H         LINE#         9
-  C:0231H         LINE#         10
-  C:0232H         LINE#         11
-  C:0233H         LINE#         12
-  C:0234H         LINE#         13
-  C:0235H         LINE#         15
-  C:0238H         LINE#         16
-  C:023BH         LINE#         17
-  C:023DH         LINE#         18
-  C:0240H         LINE#         19
-  C:0243H         LINE#         20
-  C:0243H         LINE#         21
-  C:0246H         LINE#         22
+  C:020EH         LINE#         5
+  C:020EH         LINE#         8
+  C:0211H         LINE#         9
+  C:0212H         LINE#         10
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  21:39:35  PAGE 8
+
+
+  C:0213H         LINE#         11
+  C:0214H         LINE#         12
+  C:0215H         LINE#         13
+  C:0216H         LINE#         14
+  C:0219H         LINE#         15
+  C:021CH         LINE#         16
+  C:021EH         LINE#         17
+  C:0221H         LINE#         18
+  C:0224H         LINE#         19
+  C:0224H         LINE#         20
+  C:0227H         LINE#         21
   -------         ENDPROC       GETKEYS
   -------         ENDMOD        KEYS
 
@@ -419,9 +441,6 @@ SYMBOL TABLE OF MODULE:  tenx51-78 (?C_STARTUP)
   D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  20:54:46  PAGE 8
-
-
   D:00B0H         PUBLIC        P3
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
@@ -460,6 +479,9 @@ SYMBOL TABLE OF MODULE:  tenx51-78 (?C_STARTUP)
   D:00B8H         PUBLIC        IP
   B:0098H.0       PUBLIC        RI
   B:0098H.1       PUBLIC        TI
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  21:39:35  PAGE 9
+
+
   D:00F8H         PUBLIC        AUX1
   C:002AH         PUBLIC        P1_int
   D:0098H         PUBLIC        SCON
@@ -479,9 +501,6 @@ SYMBOL TABLE OF MODULE:  tenx51-78 (?C_STARTUP)
   C:0029H         PUBLIC        TIMER3_int
   D:00C8H         PUBLIC        T2CON
   C:0006H         PUBLIC        UART_int
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  20:54:46  PAGE 9
-
-
   B:0020H.1       PUBLIC        b1ms
   C:0032H         PUBLIC        ADC_TK_int
   D:00D0H         PUBLIC        PSW
@@ -515,20 +534,23 @@ SYMBOL TABLE OF MODULE:  tenx51-78 (?C_STARTUP)
   C:000EH         LINE#         67
   C:000EH         LINE#         68
   C:0010H         LINE#         69
-  C:0012H         LINE#         73
+  C:0012H         LINE#         74
   -------         ENDPROC       TIMER2_INT
   -------         PROC          TIMER3_INT
-  C:0029H         LINE#         81
+  C:0029H         LINE#         82
   -------         ENDPROC       TIMER3_INT
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  21:39:35  PAGE 10
+
+
   -------         PROC          P1_INT
-  C:002AH         LINE#         89
+  C:002AH         LINE#         90
   -------         ENDPROC       P1_INT
   -------         PROC          INT2_INT
-  C:0031H         LINE#         97
+  C:0031H         LINE#         98
   -------         ENDPROC       INT2_INT
   -------         PROC          ADC_TK_INT
-  C:0032H         LINE#         105
-  C:0032H         LINE#         109
+  C:0032H         LINE#         106
+  C:0032H         LINE#         110
   -------         ENDPROC       ADC_TK_INT
   -------         ENDMOD        ISR
 
@@ -539,9 +561,6 @@ SYMBOL TABLE OF MODULE:  tenx51-78 (?C_STARTUP)
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
   D:00A8H         PUBLIC        IE
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  20:54:46  PAGE 10
-
-
   B:0090H.1       PUBLIC        P1_1
   B:0090H.2       PUBLIC        P1_2
   B:0090H.3       PUBLIC        P1_3
@@ -555,7 +574,7 @@ SYMBOL TABLE OF MODULE:  tenx51-78 (?C_STARTUP)
   B:00B0H.6       PUBLIC        P3_6
   D:00F8H         PUBLIC        AUX1
   C:00E2H         PUBLIC        _smg_display
-  C:0148H         PUBLIC        _smg_double
+  C:0184H         PUBLIC        _smg_double
   D:0008H         PUBLIC        mask
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
@@ -580,6 +599,9 @@ SYMBOL TABLE OF MODULE:  tenx51-78 (?C_STARTUP)
   C:00FFH         LINE#         25
   C:0101H         LINE#         26
   C:0101H         LINE#         27
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  21:39:35  PAGE 11
+
+
   C:0103H         LINE#         28
   C:0103H         LINE#         30
   C:0108H         LINE#         31
@@ -599,9 +621,6 @@ SYMBOL TABLE OF MODULE:  tenx51-78 (?C_STARTUP)
   C:011EH         LINE#         47
   C:011EH         LINE#         48
   C:0120H         LINE#         49
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  20:54:46  PAGE 11
-
-
   C:0122H         LINE#         50
   C:0122H         LINE#         51
   C:0124H         LINE#         52
@@ -635,19 +654,22 @@ SYMBOL TABLE OF MODULE:  tenx51-78 (?C_STARTUP)
   -------         DO            
   D:0012H         SYMBOL        a
   -------         ENDDO         
-  C:0148H         LINE#         83
-  C:014CH         LINE#         85
-  C:0162H         LINE#         86
-  C:0169H         LINE#         87
-  C:0170H         LINE#         88
-  C:0177H         LINE#         89
-  C:017EH         LINE#         90
-  C:0182H         LINE#         91
+  C:0184H         LINE#         83
+  C:0188H         LINE#         85
+  C:019EH         LINE#         86
+  C:01A5H         LINE#         87
+  C:01ACH         LINE#         88
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  21:39:35  PAGE 12
+
+
+  C:01B3H         LINE#         89
+  C:01BAH         LINE#         90
+  C:01BEH         LINE#         91
   -------         ENDPROC       _SMG_DOUBLE
   -------         ENDMOD        SMG
 
   -------         MODULE        ?C?SLCMP
-  C:0278H         PUBLIC        ?C?SLCMP
+  C:0257H         PUBLIC        ?C?SLCMP
   -------         ENDMOD        ?C?SLCMP
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
@@ -659,8 +681,5 @@ SYMBOL TABLE OF MODULE:  tenx51-78 (?C_STARTUP)
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_SMG_DOUBLE?SMG
 
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/04/2020  20:54:46  PAGE 12
-
-
-Program Size: data=26.2 xdata=0 code=657
+Program Size: data=26.2 xdata=0 code=665
 LINK/LOCATE RUN COMPLETE.  3 WARNING(S),  0 ERROR(S)
