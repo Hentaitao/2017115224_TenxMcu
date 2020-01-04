@@ -47,7 +47,7 @@ void main() {
 bit smgval=0;
 	void TaskSetting(){	
 		if(D_keyValue1==keyValue3){
-			led_init();
+			//led_init();
 			F_ledNeg2();
             buzzCounter=1000;
 		}
@@ -62,13 +62,21 @@ bit smgval=0;
 				smgval=1;
 			}else
 			{
+				
 				smg_close();
 				smgval=0;
+				
+				
 			}
-			smg_init();
-            
+			
 		}
-
+		if (D_keyValue1==keyValue1)
+		{
+			F_ledNeg1();
+			buzzCounter=1000;
+		}
+		
+        keyValue1=D_keyNull;
 		keyValue3=D_keyNull;
 		keyValue2=D_keyNull;
 		keyValue4=D_keyNull;
