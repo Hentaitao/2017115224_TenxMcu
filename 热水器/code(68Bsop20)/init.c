@@ -72,17 +72,10 @@ void KeyInit()
 {
 	/* key 1 */
 	P3MODH &= P34MOD_Mask;
-	P3MODH |= P34MOD_0;
-
 	/* key 2 */
 	P3MODL &= P32MOD_Mask;
-	P3MODL |= P32MOD_0;
-
 	/* key 3 */
 	P1MODH &= P17MOD_Mask;
-	P1MODH |= P17MOD_0;
-
 	/* key 4 */
 	P1MODL &= P12MOD_Mask;
-	P1MODL |= P12MOD_0;
 }

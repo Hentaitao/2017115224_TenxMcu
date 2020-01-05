@@ -39,12 +39,13 @@ void main() {
 			timer5ms++;
 		}
 		if (timer5ms >= 5) {
-            
+            	
 			GetKeys();
 		}
 	}
 //=============================================================================
 bit smgval=0;
+
 	void TaskSetting(){	
 		if(D_keyValue1==keyValue3){
 			//led_init();
@@ -64,22 +65,24 @@ bit smgval=0;
 			{
 				
 				smg_close();
+
 				smgval=0;
-				
-				
 			}
-			
+			KeyInit();
+			led_init();
 		}
 		if (D_keyValue1==keyValue1)
 		{
 			F_ledNeg1();
 			buzzCounter=1000;
 		}
+
+		
 		
         keyValue1=D_keyNull;
 		keyValue3=D_keyNull;
 		keyValue2=D_keyNull;
-		keyValue4=D_keyNull;
+		//keyValue4=D_keyNull;
 	} 
 //=============================================================================
 	void TaskProcess(){

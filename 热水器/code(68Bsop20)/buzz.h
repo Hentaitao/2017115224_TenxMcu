@@ -20,6 +20,5 @@
     #endif
 
 //Function----------------------
-	void BuzzCount(uint8_t count) ;
-    void Buzz() ;
+
 #endif

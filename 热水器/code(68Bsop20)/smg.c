@@ -82,14 +82,14 @@ void smg_display(char x,uint8_t number){
 */
 void smg_double(char x,char y){
     uint8_t a,b;
-    for(a=0;a<10000;a++){
-    for(b=0;b<50;b++){
+    for(a=0;a<1000;a++){
+    for(b=0;b<100;b++){
         smg_display(x,2);
         delayMs(1);
         smg_display(y,1);
         delayMs(1);
     }
-    delayMs(50);
+   // delayMs(10);
     GetKeys();
     if(keyValue2==D_keyValue1){
         break;
@@ -97,6 +97,7 @@ void smg_double(char x,char y){
     }
 
 }
+
 
 /*¹Ø±ÕÊıÂë¹Ü*/
 void smg_close(){

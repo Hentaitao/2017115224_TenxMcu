@@ -22,6 +22,7 @@
 
 // Function ------------------------------------
 void smg_double(char x,char y);
+
 void smg_display(char x,uint8_t number);
 void smg_close(void);
 #endif
