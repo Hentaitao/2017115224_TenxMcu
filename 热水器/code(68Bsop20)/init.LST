@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   INIT                                                              01/05/2020 13:30:11 PAGE 1   
+C51 COMPILER V9.60.0.0   INIT                                                              01/05/2020 18:53:08 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE INIT
@@ -36,60 +36,58 @@ line level    source
   27   1        P1MODL = 0xaa;    //将模式设置为推挽输出
   28   1        P1MODH = 0xaa;
   29   1        //P1MODL = 0xa8;    //上拉输入
-  30   1      
-  31   1        
-  32   1        smg_init();
-  33   1        KeyInit();
-  34   1        led_init();
-  35   1        // T2 ???  7.3728Mhz/2 = 3686400Hz
-  36   1        //  3686400Hz/3686.4 = 1000Hz = 1ms timer2 
-  37   1        TH2 = (65536 - 922) / 256;
-  38   1        RCP2H = TH2;
-  39   1        TL2 = (65536 - 922) % 256;
-  40   1        RCP2L = TL2;
-  41   1        TR2 = 1;
-  42   1        ET2 = 1;
-  43   1        EA = 1; 
-  44   1      }
-  45          //=============================================================================
-  46          void VarsInit() {}
-  47          
-  48          /*数码管初始化，将a~dg设为推挽输出*/
-  49          void smg_init(){
-  50   1        /*a 1.4 || d 1.7 */
-  51   1        P1MODH &= 0x3c;
-  52   1        P1MODH |= 0x82;
-  53   1        /*b 3.4 || c 3.5 || e 3.6*/
-  54   1        P3MODH &= 0x00;
-  55   1        P3MODH |= 0x2a;
-C51 COMPILER V9.60.0.0   INIT                                                              01/05/2020 13:30:11 PAGE 2   
+  30   1        smg_init();
+  31   1        KeyInit();
+  32   1        led_init();
+  33   1        // T2 ???  7.3728Mhz/2 = 3686400Hz
+  34   1        //  3686400Hz/3686.4 = 1000Hz = 1ms timer2 
+  35   1        TH2 = (65536 - 922) / 256;
+  36   1        RCP2H = TH2;
+  37   1        TL2 = (65536 - 922) % 256;
+  38   1        RCP2L = TL2;
+  39   1        TR2 = 1;
+  40   1        ET2 = 1;
+  41   1        EA = 1; 
+  42   1      }
+  43          //=============================================================================
+  44          void VarsInit() {}
+  45          
+  46          /*数码管初始化，将a~dg设为推挽输出*/
+  47          void smg_init(){
+  48   1        /*a 1.4 || d 1.7 */
+  49   1        P1MODH &= 0x3c;
+  50   1        P1MODH |= 0x82;
+  51   1        /*b 3.4 || c 3.5 || e 3.6*/
+  52   1        P3MODH &= 0x00;
+  53   1        P3MODH |= 0x2a;
+  54   1        /*f 1.2||dg 1.3 */
+  55   1        P1MODL &= 0x0f;
+C51 COMPILER V9.60.0.0   INIT                                                              01/05/2020 18:53:08 PAGE 2   
 
-  56   1        /*f 1.2||dg 1.3 */
-  57   1        P1MODL &= 0x0f;
-  58   1        P1MODL |= 0xa0;
-  59   1        /*g 3.2*/
-  60   1        P3MODL &= 0xcf;
-  61   1        P3MODL |= 0x20;
-  62   1      }
-  63          
-  64          void led_init(){
-  65   1        P1MODL &= P12MOD_Mask;
-  66   1        P1MODL |= P12MOD_2;
-  67   1      
-  68   1        P1MODH &= P14MOD_Mask;
-  69   1        P1MODH |= P14MOD_2;
-  70   1      }
-  71          void KeyInit()
-  72          {
-  73   1        /* key 1 */
-  74   1        P3MODH &= P34MOD_Mask;
-  75   1        /* key 2 */
-  76   1        P3MODL &= P32MOD_Mask;
-  77   1        /* key 3 */
-  78   1        P1MODH &= P17MOD_Mask;
-  79   1        /* key 4 */
-  80   1        P1MODL &= P12MOD_Mask;
-  81   1      }
+  56   1        P1MODL |= 0xa0;
+  57   1        /*g 3.2*/
+  58   1        P3MODL &= 0xcf;
+  59   1        P3MODL |= 0x20;
+  60   1      }
+  61          
+  62          void led_init(){
+  63   1        P1MODL &= P12MOD_Mask;
+  64   1        P1MODL |= P12MOD_2;
+  65   1      
+  66   1        P1MODH &= P14MOD_Mask;
+  67   1        P1MODH |= P14MOD_2;
+  68   1      }
+  69          void KeyInit()
+  70          {
+  71   1        /* key 1 */
+  72   1        P3MODH &= P34MOD_Mask;
+  73   1        /* key 2 */
+  74   1        P3MODL &= P32MOD_Mask;
+  75   1        /* key 3 */
+  76   1        P1MODH &= P17MOD_Mask;
+  77   1        /* key 4 */
+  78   1        P1MODL &= P12MOD_Mask;
+  79   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
