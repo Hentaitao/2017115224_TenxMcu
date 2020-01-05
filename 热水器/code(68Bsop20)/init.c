@@ -27,8 +27,6 @@ void SysInit() {
 	P1MODL = 0xaa;		//将模式设置为推挽输出
 	P1MODH = 0xaa;
 	//P1MODL = 0xa8;		//上拉输入
-
-  
   smg_init();
 	KeyInit();
   led_init();
