@@ -73,9 +73,9 @@ bit smgval=0;
 			{
 				
 				smg_close();
-
 				smgval=0;
 			}
+			
 			KeyInit();
 			led_init();
 		}
@@ -93,6 +93,7 @@ bit smgval=0;
 		    TR2=1;
 			i=0;
 			}
+			
 		}
 
 		
